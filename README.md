@@ -1,0 +1,1 @@
+Assignments/Mini-projects for CSE508 Network Security coursework

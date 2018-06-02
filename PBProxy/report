@@ -1,0 +1,134 @@
+Name: Atmika Sharma
+SBU ID: 111464371
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+
+System details:
+
+Ubuntu 16.04 LTS
+Linux 4.10.0-38-generic
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Compiler:
+
+gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.4)
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Execution:
+
+
+1. To exchange messages between a client and server using pbproxy to encrpyt and decrypt the messages, we introduce a server (server.c)
+
+-> Run server listening on port 8090: ./server
+
+-> Run client/pbproxy: ./pbproxy -k mykey localhost 8090
+
+
+2. Using pbproxy to run ssh
+
+-> Server side: ./pbproxy -k mykey -l 8090 localhost 22
+
+-> Client side: ssh -o "ProxyCommand ./pbproxy -k mykey localhost 8090" localhost
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Architecture:
+
+We decide the mode based on the -l option.
+
+
+Code flow for proxy mode true:
+
+1. The client accepts the input from the standard input and encrypts it using AES encryption. It then relays the message to the proxy server.
+
+2. Pbproxy then decrypts it and forwards it to the actual server which it was intended for.
+
+3. The destination server processes the query/request and sends a response to the proxy server.
+
+4. The proxy server encrypts the responses and fowards it to the client.
+
+5. The client decrypts this message and prints it.
+
+
+Code flow for proxy mode false:
+
+1. We run pbproxy on client side where it encrypts the message received from the standard input and relays it to the server.
+
+2. The server responds to the relayed message.
+
+3. pbproxy on the client side decrypts it and displays it on standard output.
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+References:
+
+1. http://www.cs.rpi.edu/~moorthy/Courses/os98/Pgms/socket.html
+
+2. http://www.gurutechnologies.net/blog/aes-ctr-encryption-in-c/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
